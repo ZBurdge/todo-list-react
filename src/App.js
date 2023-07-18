@@ -1,8 +1,9 @@
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
+import ToDoInput from "./ToDoInput";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <div className="container">
@@ -11,9 +12,8 @@ function App() {
           <FontAwesomeIcon icon={faListCheck} style={{ color: "#ffb6c1" }} />
         </header>
         <ToDoInput />
+        
       </div>
     </div>
   );
 }
-
-export default App;
