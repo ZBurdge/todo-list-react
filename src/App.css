@@ -21,7 +21,7 @@
   padding: 10px;
 }
 
-.container {
+.ToDoApp {
   width: 100%;
   max-width: 540px;
   margin: 100px auto 20px;
@@ -34,4 +34,12 @@ header {
   text-align: center;
   text-decoration: underline;
   font-style: italic;
+}
+
+footer {
+  text-align: center;
+}
+
+a {
+  color: white;
 }
