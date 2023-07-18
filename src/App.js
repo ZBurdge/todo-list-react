@@ -2,7 +2,6 @@ import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ToDoInput from "./ToDoInput";
-import ToDoList from "./ToDoList";
 
 export default function App() {
   return (
@@ -14,11 +13,14 @@ export default function App() {
             <FontAwesomeIcon icon={faListCheck} style={{ color: "#ffb6c1" }} />
           </header>
           <ToDoInput />
-          <ToDoList />
         </div>
         <footer>
           Coded by Zgene' Burdge and open sourced on
-          <a href="https://github.com/ZBurdge/To-do-List.git" target="_blank">
+          <a
+            href="https://github.com/ZBurdge/To-do-List.git"
+            target="_blank"
+            rel="noreferrer"
+          >
             GitHub
           </a>
         </footer>
