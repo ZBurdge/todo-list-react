@@ -12,7 +12,7 @@ export default function App() {
           <FontAwesomeIcon icon={faListCheck} style={{ color: "#ffb6c1" }} />
         </header>
         <ToDoInput />
-        
+        <ToDoList />
       </div>
     </div>
   );
