@@ -2,6 +2,7 @@ import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ToDoInput from "./ToDoInput";
+import ToDoList from "./ToDoList";
 
 export default function App() {
   return (
