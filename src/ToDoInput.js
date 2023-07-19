@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import ToDoList from "./ToDoList";
 import "./ToDoInput.css";
 
-export default function TodoInput(addTask) {
+export default function TodoInput({ addTask }) {
   const inputBoxRef = useRef(null);
 
   const handleKeyPress = (event) => {
