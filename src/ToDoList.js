@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ToDoList.css";
-import ToDoItem from "./ToDoItem"
+import ToDoItem from "./ToDoItem";
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState([]);
@@ -31,7 +31,7 @@ export default function ToDoList() {
     saveData();
   };
 
-  const removeTask = () => {
+  const removeTask = (taskId) => {
     setTaskList((prevTaskList) =>
       prevTaskList.filter((task) => task.id !== taskId)
     );
@@ -53,8 +53,8 @@ export default function ToDoList() {
     <div>
       <ul id="todo-list">
         {taskList.map((task) => (
-          <TodoItem
-            key={task.is}
+          <ToDoItem
+            key={task.id}
             task={task}
             toggleTask={toggleTask}
             removeTask={removeTask}
