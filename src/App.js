@@ -57,8 +57,13 @@ export default function App() {
       <div className="container">
         <div className="ToDoApp">
           <header>
-            <h2>To-Do List</h2>
-            <FontAwesomeIcon icon={faListCheck} style={{ color: "#ffb6c1" }} />
+            <h2>
+              To-Do List{" "}
+              <FontAwesomeIcon
+                icon={faListCheck}
+                style={{ color: "#ffb6c1" }}
+              />
+            </h2>
           </header>
           <ToDoInput addTask={addTask} />
           <ToDoList
