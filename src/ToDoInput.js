@@ -24,7 +24,7 @@ export default function TodoInput(addTask) {
             type="text"
             placeholder="Enter your task"
             ref={inputBoxRef}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
           />
           <button onClick={handleAddTask}>Add</button>
         </form>
