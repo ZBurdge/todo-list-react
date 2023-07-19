@@ -1,39 +1,64 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./ToDoList.css";
 
 export default function ToDoList() {
-  const todoList = document.getElementById("todo-list");
+  const [taskList, setTaskList] = useState([]);
 
-  todoList.addEventListener(
-    "click",
-    function (event) {
-      if (event.target.tagName === "LI") {
-        event.target.classList.toggle("checked");
-        saveData();
-      } else if (event.target.tagName === "SPAN") {
-        event.target.parentElement.remove();
-        saveData();
-      }
-    },
-    false
-  );
+  useEffect(() => {
+    showTask();
+  }, []);
 
-  function saveData() {
-    localStorage.setItem("data", todoList.innerHTML);
-  }
+  const addTask = (task) => {
+    if (task.trim() === "") {
+      alert("Please enter your task");
+    } else {
+      const newTask = { id: DataTransfer.now(), task, checked: false };
+      setTaskList((prevTaskList) => [...prevTaskList, newTask]);
+    }
+    saveData();
+  };
 
-  function showTask() {
-    todoList.innerHTML = localStorage.getItem("data");
-  }
+  const toggleTask = (taskId) => {
+    setTaskList((prevTaskList) =>
+      prevTaskList.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, checked: !task.checked };
+        }
+        return task;
+      })
+    );
+    saveData();
+  };
 
-  showTask();
+  const removeTask = () => {
+    setTaskList((prevTaskList) =>
+      prevTaskList.filter((task) => task.id !== taskId)
+    );
+    saveData();
+  };
+
+  const saveData = () => {
+    localStorage.setItem("data", JSON.stringify(taskList));
+  };
+
+  const showTask = () => {
+    const savedData = localStorage.getItem("data");
+    if (savedData) {
+      setTaskList(JSON.parse(savedData));
+    }
+  };
 
   return (
     <div>
       <ul id="todo-list">
-        {/* <li class="checked">Task 1</li>
-          <li>Task 2</li>
-  <li>Task 3</li> */}
+        {taskList.map((task) => (
+          <TodoItem
+            key={task.is}
+            task={task}
+            toggleTask={toggleTask}
+            removeTask={removeTask}
+          />
+        ))}
       </ul>
     </div>
   );
