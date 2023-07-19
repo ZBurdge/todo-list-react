@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
@@ -5,6 +6,52 @@ import ToDoInput from "./ToDoInput";
 import ToDoList from "./ToDoList";
 
 export default function App() {
+  const [taskList, setTaskList] = useState([]);
+
+  useEffect(() => {
+    showTask();
+  }, []);
+
+  const addTask = (task) => {
+    if (task.trim() === "") {
+      alert("Please enter your task.");
+    } else {
+      const newTask = { id: Date.now(), task, checked: false };
+      setTaskList((prevTaskList) => [...prevTaskList, newTask]);
+    }
+    saveData();
+  };
+
+  const toggleTask = (taskId) => {
+    setTaskList((prevTaskList) =>
+      prevTaskList.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, checked: !task.checked };
+        }
+        return task;
+      })
+    );
+    saveData();
+  };
+
+  const removeTask = (taskId) => {
+    setTaskList((prevTaskList) =>
+      prevTaskList.filter((task) => task.id !== taskId)
+    );
+    saveData();
+  };
+
+  const saveData = () => {
+    localStorage.setItem("data", JSON.stringify(taskList));
+  };
+
+  const showTask = () => {
+    const savedData = localStorage.getItem("data");
+    if (savedData) {
+      setTaskList(JSON.parse(savedData));
+    }
+  };
+
   return (
     <div className="App">
       <div className="container">
@@ -13,8 +60,12 @@ export default function App() {
             <h2>To-Do List</h2>
             <FontAwesomeIcon icon={faListCheck} style={{ color: "#ffb6c1" }} />
           </header>
-          <ToDoInput />
-          <ToDoList />
+          <ToDoInput addTask={addTask} />
+          <ToDoList
+            taskList={taskList}
+            toggleTask={toggleTask}
+            removeTask={removeTask}
+          />
         </div>
         <footer>
           Coded by Zgene' Burdge and open sourced on

@@ -1,35 +1,30 @@
-import React, { useRef } from "react";
-import ToDoList from "./ToDoList";
+import React, { useState } from "react";
 import "./ToDoInput.css";
 
 export default function TodoInput({ addTask }) {
-  const inputBoxRef = useRef(null);
+  const [task, setTask] = useState("");
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      addTask(inputBoxRef.current.value);
-      inputBoxRef.current.value = "";
-    }
-
-    const handleAddTask = () => {
-      addTask(inputBoxRef.current.value);
-      inputBoxRef.current.value = "";
-    };
-
-    return (
-      <div>
-        <form className="row todo-input">
-          <input
-            type="text"
-            placeholder="Enter your task"
-            ref={inputBoxRef}
-            onKeyDown={handleKeyPress}
-          />
-          <button onClick={handleAddTask}>Add</button>
-        </form>
-        <ToDoList />
-      </div>
-    );
+  const handleChange = (e) => {
+    setTask(e.target.value);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTask(task);
+    setTask("");
+  };
+
+  return (
+    <div className="row todo-input">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter your task"
+          value={task}
+          onChange={handleChange}
+        />
+        <button type="submit">Add</button>
+      </form>
+    </div>
+  );
 }

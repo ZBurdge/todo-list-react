@@ -1,17 +1,13 @@
 import React from "react";
 
 export default function ToDoItem({ task, toggleTask, removeTask }) {
-  const handleToggle = () => {
-    toggleTask(task.id);
-  };
-  const handleRemove = () => {
-    removeTask(task.id);
-  };
-
   return (
-    <li className={task.checked ? "checked" : ""} onClick={handleToggle}>
+    <li
+      className={task.checked ? "checked" : ""}
+      onClick={() => toggleTask(task.id)}
+    >
       {task.task}
-      <span onClick={handleRemove}>&times;</span>
+      <span onClick={() => removeTask(task.id)}>&times;</span>
     </li>
   );
 }
