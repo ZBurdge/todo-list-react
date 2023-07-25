@@ -32,20 +32,15 @@ export default function App() {
     );
   };
 
-  const showTask = () => {
-    let savedData = JSON.parse(localStorage.getItem("data"));
-    console.log("Saved Data from localStorage:", savedData);
-    if (savedData) {
-      setTaskList(savedData);
-    }
-  };
-
   useEffect(() => {
-    showTask();
+    const savedTaskList = JSON.parse(localStorage.getItem("taskList"));
+    if (savedTaskList) {
+      setTaskList(savedTaskList);
+    }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(taskList));
+    localStorage.setItem("taskList", JSON.stringify(taskList));
   }, [taskList]);
 
   return (
