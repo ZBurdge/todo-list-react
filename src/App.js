@@ -5,16 +5,33 @@ import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ToDoInput from "./ToDoInput";
 import ToDoList from "./ToDoList";
 
+const storage_key = 'taskList';
+
+function saveData(data) {
+  try {
+    localStorage.setItem(storage_key, JSON.stringify(data));
+  } catch (e) {
+    console.log('oops');
+  }
+}
+function getData(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key));
+  } catch (e) {
+    console.log('oops');
+    return [];
+  }
+}
+
+
 export default function App() {
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(
+    getData(storage_key)
+  );
 
   const addTask = (task) => {
-    if (task.trim() === "") {
-      alert("Please enter your task.");
-    } else {
-      const newTask = { id: Date.now(), task, checked: false };
-      setTaskList((prevTaskList) => [...prevTaskList, newTask]);
-    }
+    const newTask = { id: Date.now(), task, checked: false };
+    setTaskList((prevTaskList) => [...prevTaskList, newTask]);
   };
 
   const toggleTask = (taskId) => {
@@ -33,14 +50,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    const savedTaskList = JSON.parse(localStorage.getItem("taskList"));
-    if (savedTaskList) {
-      setTaskList(savedTaskList);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("taskList", JSON.stringify(taskList));
+    saveData(taskList);
   }, [taskList]);
 
   return (

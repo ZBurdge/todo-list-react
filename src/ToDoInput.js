@@ -7,9 +7,12 @@ export default function TodoInput({ addTask }) {
   const handleChange = (e) => {
     setTask(e.target.value);
   };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (task.trim() === '') {
+      return alert('need note');
+    }
     addTask(task);
     setTask("");
   };
