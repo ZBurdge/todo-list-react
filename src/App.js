@@ -8,10 +8,6 @@ import ToDoList from "./ToDoList";
 export default function App() {
   const [taskList, setTaskList] = useState([]);
 
-  useEffect(() => {
-    showTask();
-  }, []);
-
   const addTask = (task) => {
     if (task.trim() === "") {
       alert("Please enter your task.");
@@ -19,38 +15,38 @@ export default function App() {
       const newTask = { id: Date.now(), task, checked: false };
       setTaskList((prevTaskList) => [...prevTaskList, newTask]);
     }
-    saveData();
   };
 
   const toggleTask = (taskId) => {
     setTaskList((prevTaskList) =>
-      prevTaskList.map((task) => {
-        if (task.id === taskId) {
-          return { ...task, checked: !task.checked };
-        }
-        return task;
-      })
+      prevTaskList.map((task) => ({
+        ...task,
+        checked: task.id === taskId ? !task.checked : task.checked,
+      }))
     );
-    saveData();
   };
 
   const removeTask = (taskId) => {
     setTaskList((prevTaskList) =>
       prevTaskList.filter((task) => task.id !== taskId)
     );
-    saveData();
-  };
-
-  const saveData = () => {
-    localStorage.setItem("data", JSON.stringify(taskList));
   };
 
   const showTask = () => {
-    const savedData = localStorage.getItem("data");
+    let savedData = JSON.parse(localStorage.getItem("data"));
+    console.log("Saved Data from localStorage:", savedData);
     if (savedData) {
-      setTaskList(JSON.parse(savedData));
+      setTaskList(savedData);
     }
   };
+
+  useEffect(() => {
+    showTask();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(taskList));
+  }, [taskList]);
 
   return (
     <div className="App">
