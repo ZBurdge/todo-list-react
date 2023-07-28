@@ -45,7 +45,7 @@ a {
   text-decoration: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .ToDoApp {
     margin: 50px auto 20px;
     padding: 20px 15px;
