@@ -25,7 +25,7 @@ function getData(key) {
 }
 
 export default function App() {
-  const [taskList, setTaskList] = useState(() => getData(storage_key));
+  const [taskList, setTaskList] = useState(getData(storage_key) || []);
 
   const addTask = (task) => {
     const newTask = { id: Date.now(), task, checked: false };
