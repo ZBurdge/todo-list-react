@@ -23,3 +23,18 @@ button {
   padding: 16px 50px;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 767px) {
+  form {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  input {
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 12px 30px;
+  }
+}
