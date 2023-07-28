@@ -5,29 +5,27 @@ import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ToDoInput from "./ToDoInput";
 import ToDoList from "./ToDoList";
 
-const storage_key = 'taskList';
+const storage_key = "taskList";
 
 function saveData(data) {
   try {
     localStorage.setItem(storage_key, JSON.stringify(data));
   } catch (e) {
-    console.log('oops');
+    console.log("oops");
   }
 }
 function getData(key) {
   try {
-    return JSON.parse(localStorage.getItem(key));
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
   } catch (e) {
-    console.log('oops');
+    console.log("oops");
     return [];
   }
 }
 
-
 export default function App() {
-  const [taskList, setTaskList] = useState(
-    getData(storage_key)
-  );
+  const [taskList, setTaskList] = useState(() => getData(storage_key));
 
   const addTask = (task) => {
     const newTask = { id: Date.now(), task, checked: false };
